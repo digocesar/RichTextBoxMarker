@@ -101,6 +101,20 @@ namespace WinForms.EditorExtensions
             base.OnSelectionChanged(e);
         }
 
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            if (ShowSpecialCharacter && e.Control && e.KeyCode == Keys.C)
+            {
+                var textWithoutMarkers = SelectedText
+                   .Replace(SpaceSymbol, ' ')
+                   .Replace(NewLineSymbol.ToString(), "");
+
+                Clipboard.SetText(textWithoutMarkers);
+            }
+
+            base.OnKeyUp(e);
+        }
+
         #endregion
 
 
